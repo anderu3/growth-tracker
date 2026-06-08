@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#06060a">
+<title>30-Day Growth Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #06060a;
+    --bg2: #0c0c14;
+    --bg3: #12121e;
+    --border: #1a1a28;
+    --border2: #252538;
+    --text: #d4d4e0;
+    --text2: #888898;
+    --text3: #555566;
+    --accent: #4ade80;
+    --accent2: #22c55e;
+    --accent-dim: rgba(74,222,128,0.08);
+    --jp: #F4511E;
+    --guitar: #eab308;
+    --leet: #4ade80;
+    --school: #a855f7;
+    --job: #ef4444;
+    --gym: #f87171;
+    --poke: #fb923c;
+    --mono: 'IBM Plex Mono', 'SF Mono', 'Consolas', monospace;
+    --sans: 'Outfit', -apple-system, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.5;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+
+  .app {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 16px 16px 100px;
+    position: relative;
+  }
+
+  /* === HEADER === */
+  .header { padding-bottom: 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+  .header-row { display: flex; justify-content: space-between; align-items: center; }
+  .logo { font-family: var(--sans); font-size: 17px; font-weight: 700; color: #fff; letter-spacing: 1.5px; }
+  .logo span { color: var(--accent); }
+  .day-pill {
+    background: var(--accent-dim);
+    color: var(--accent);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border: 1px solid rgba(74,222,128,0.15);
+  }
+  .subline { font-size: 11px; color: var(--text3); margin-top: 6px; }
+
+  /* === NAV === */
+  .nav {
+    display: flex;
+    gap: 2px;
+    background: var(--bg2);
+    border-radius: 8px;
+    padding: 3px;
+    margin-bottom: 16px;
+  }
+  .nav button {
+    flex: 1;
+    padding: 9px 4px;
+    background: transparent;
+    color: var(--text3);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+  .nav button.active {
+    background: var(--bg3);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+
+  /* === PLAN CARD === */
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 12px;
+    animation: fadeUp 0.25s ease;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .card-label {
+    font-size: 10px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .plan-row {
+    font-size: 12px;
+    color: var(--text);
+    line-height: 2.2;
+    padding-left: 2px;
+  }
+  .plan-row .emoji { display: inline-block; width: 22px; }
+  .plan-note { font-size: 11px; color: var(--poke); margin-top: 6px; font-style: italic; }
+
+  /* === BLOCKS === */
+  .block {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--text3);
+    border-radius: 8px;
+    margin-bottom: 6px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+    animation: fadeUp 0.2s ease;
+  }
+  .block-head {
+    width: 100%;
+    padding: 13px 14px;
+    background: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 13px;
+  }
+  .block-status { font-size: 10px; letter-spacing: 0.5px; }
+  .block-status.done { color: var(--accent); }
+  .block-status.empty { color: var(--text3); }
+  .block-body {
+    padding: 0 14px 16px;
+    animation: fadeUp 0.15s ease;
+  }
+  .field { margin-bottom: 12px; }
+  .field-label {
+    font-size: 10px;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+  .field textarea {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    padding: 9px 11px;
+    font-family: var(--mono);
+    font-size: 12px;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s;
+    line-height: 1.5;
+  }
+  .field textarea:focus {
+    border-color: var(--border2);
+    box-shadow: 0 0 0 2px rgba(74,222,128,0.06);
+  }
+  .field textarea::placeholder { color: var(--text3); font-size: 11px; }
+
+  /* === DAY NAV === */
+  .day-nav { display: flex; gap: 6px; margin-top: 18px; }
+  .day-nav button {
+    flex: 1;
+    padding: 11px 8px;
+    background: var(--bg2);
+    color: var(--text2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 11px;
+    transition: all 0.15s;
+  }
+  .day-nav button:active { transform: scale(0.97); }
+  .day-nav button.today-btn { color: var(--accent); border-color: rgba(74,222,128,0.2); }
+
+  /* === CALENDAR === */
+  .cal-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 3px;
+    margin-bottom: 6px;
+  }
+  .cal-header span {
+    text-align: center;
+    font-size: 9px;
+    color: var(--text3);
+    padding: 4px;
+    letter-spacing: 1px;
+  }
+  .cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 3px;
+  }
+  .cal-cell {
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    font-family: var(--mono);
+    transition: all 0.15s;
+    gap: 1px;
+  }
+  .cal-cell:active { transform: scale(0.93); }
+  .cal-cell .num { font-size: 12px; color: var(--text2); }
+  .cal-cell .pct { font-size: 7px; color: var(--accent); font-weight: 600; }
+  .cal-cell.current { border-color: var(--accent); }
+  .cal-cell.current .num { color: var(--accent); }
+  .cal-cell.has-data { background: var(--accent-dim); }
+  .cal-spacer { aspect-ratio: 1; }
+
+  /* === SYNC === */
+  .sync-desc { font-size: 11px; color: var(--text2); line-height: 1.8; margin-bottom: 14px; }
+  .sync-btn {
+    width: 100%;
+    padding: 13px;
+    background: linear-gradient(135deg, #0a2a18, #0d3320);
+    color: var(--accent);
+    border: 1px solid rgba(74,222,128,0.2);
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.2s;
+  }
+  .sync-btn:active { transform: scale(0.98); }
+  .sync-btn:disabled { opacity: 0.4; }
+  .copy-btn {
+    width: 100%;
+    padding: 11px;
+    background: var(--bg3);
+    color: var(--text2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 12px;
+    margin-top: 10px;
+    transition: all 0.15s;
+  }
+  .copy-btn:active { transform: scale(0.98); }
+  .divider { border-top: 1px solid var(--border); margin: 18px 0; }
+  .result-box {
+    margin-top: 16px;
+    padding: 14px;
+    background: rgba(74,222,128,0.04);
+    border-radius: 8px;
+    border: 1px solid rgba(74,222,128,0.12);
+  }
+  .result-label { font-size: 9px; color: var(--accent); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; font-weight: 600; }
+  .result-text { font-size: 12px; color: var(--text); line-height: 1.7; white-space: pre-wrap; }
+  .log-preview {
+    margin-top: 16px;
+    padding: 12px;
+    background: var(--bg);
+    border-radius: 6px;
+    font-size: 10px;
+    color: var(--text3);
+    overflow: auto;
+    max-height: 200px;
+    white-space: pre-wrap;
+    border: 1px solid var(--border);
+    line-height: 1.7;
+  }
+
+  /* === TOAST === */
+  .toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg3);
+    color: var(--accent);
+    padding: 8px 24px;
+    border-radius: 24px;
+    font-size: 12px;
+    font-family: var(--mono);
+    z-index: 999;
+    border: 1px solid var(--border2);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    animation: toastIn 0.25s ease;
+    pointer-events: none;
+  }
+  @keyframes toastIn {
+    from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+    to { opacity: 1; transform: translateX(-50%) translateY(0); }
+  }
+
+  .footer {
+    margin-top: 32px;
+    text-align: center;
+    font-size: 9px;
+    color: var(--text3);
+    letter-spacing: 0.5px;
+    opacity: 0.6;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+</style>
+</head>
+<body>
+<div class="app" id="app"></div>
+
+<script>
+// ===== DATA =====
+const STORAGE_KEY = "growth30_v2";
+const DAYS = 30;
+const START = new Date("2026-06-09T00:00:00");
+
+const BLOCKS = [
+  { id:"japanese", emoji:"🇯🇵", label:"Japanese", color:"var(--jp)",
+    fields:[
+      {key:"anki_done",label:"Anki cards completed",ph:"e.g. 35/50",rows:1},
+      {key:"grammar",label:"Grammar covered",ph:"e.g. て-form, は vs が",rows:1},
+      {key:"struggles",label:"Struggles",ph:"What was hard?",rows:2},
+      {key:"adjust",label:"Schedule adjustment?",ph:"e.g. need more time on Ch3",rows:2},
+    ]},
+  { id:"guitar", emoji:"🎸", label:"Guitar", color:"var(--guitar)",
+    fields:[
+      {key:"completed",label:"What I practiced",ph:"e.g. pos 1-2 transitions, vibrato",rows:1},
+      {key:"time_mins",label:"Total minutes today",ph:"e.g. 90",rows:1},
+      {key:"fun",label:"Fun level (1-10)",ph:"1-10",rows:1},
+      {key:"adjust",label:"Schedule adjustment?",ph:"e.g. need more bending work",rows:2},
+    ]},
+  { id:"leetcode", emoji:"💻", label:"LeetCode", color:"var(--leet)",
+    fields:[
+      {key:"done",label:"Problems completed",ph:"e.g. Two Sum ✓, Group Anagrams ✗",rows:1},
+      {key:"patterns",label:"Patterns used",ph:"e.g. hash map, two pointer",rows:1},
+      {key:"stuck",label:"Stuck on",ph:"What tripped you up?",rows:2},
+      {key:"adjust",label:"Schedule adjustment?",ph:"e.g. need another day on sliding window",rows:2},
+    ]},
+  { id:"school", emoji:"📚", label:"School", color:"var(--school)",
+    fields:[
+      {key:"done",label:"Modules completed",ph:"e.g. Stats 101 quiz 3",rows:1},
+      {key:"notes",label:"Notes",ph:"Anything to flag",rows:2},
+    ]},
+  { id:"jobapps", emoji:"📝", label:"Job Apps", color:"var(--job)",
+    fields:[
+      {key:"companies",label:"Companies applied to",ph:"e.g. Anduril, Boeing",rows:1},
+      {key:"resumes",label:"Resumes tailored",ph:"e.g. 2 — SWE and SecEng",rows:1},
+      {key:"network",label:"Networking",ph:"e.g. messaged Kangsu re: Anduril",rows:1},
+    ]},
+  { id:"gym", emoji:"🏋️", label:"Gym", color:"var(--gym)",
+    fields:[
+      {key:"workout",label:"Workout",ph:"e.g. upper body, 45 min",rows:1},
+      {key:"notes",label:"Notes",ph:"",rows:1},
+    ]},
+];
+
+const PLANS = {
+  japanese:["Anki core deck + Hiragana review (50)","Katakana review + Anki (50)","Genki I Ch1 vocab + は/が","Genki I Ch1 workbook + listening","Genki I Ch2 vocab + です/ます","Genki I Ch2 + NHK Easy News","Week 1 review + catch-up","Genki I Ch3 verb conjugation","Genki I Ch3 て-form practice","Genki I Ch3 workbook + shadowing","Genki I Ch4 adjectives (い/な)","Genki I Ch4 grammar + reading","Genki I Ch4 workbook + listening","Week 2 review + conversation","Genki I Ch5 past tense","Genki I Ch5 counters + drills","Genki I Ch5 workbook + NHK","Genki I Ch6 て-いる form","Genki I Ch6 relative clauses","Genki I Ch6 workbook + shadowing","Week 3 review + N5 quiz","Genki I Ch7 giving/receiving","Genki I Ch7 short form","Genki I Ch7 workbook + immersion","Genki I Ch8 short form practice","Genki I Ch8 と思う/と言う","Genki I Ch8 workbook + reading","Week 4 review + reflection","Comprehensive review 1","Review 2 + month 2 goals"],
+  guitar:["Am pent pos 1 — slow tempo","Pos 1 + vibrato intro","Am pent pos 2","Pos 1-2 connection + jam","Pos 3 + bending intro","3 positions + song","Consolidation jam","Pos 4 + hammer-ons","Pos 4 + pull-offs","Pos 5 — full neck!","Full neck drilling","Vibrato + bending deep dive","Song practice","Week 2 jam + record","Blues scale (♭5)","5 classic blues licks","Blues over 12-bar","Power chords + palm muting","Rhythm + lead switching","Alternate picking speed","Week 3 full review","Target weak areas","Pentatonic Em, Dm","Intermediate song","Song + dynamics","Clean playing focus","Full repertoire marathon","Record 2-min improv","Explore new territory","Final jam + reflection"],
+  leetcode:["Two Sum + Contains Duplicate","Valid Anagram + Group Anagrams","Top K Frequent + Product of Array","Encode/Decode + Longest Consecutive","Valid Palindrome + Two Sum II","3Sum + Container","Review — redo failed","Buy/Sell Stock + Longest Substring","Longest Repeating + Min Window","Valid Parens + Min Stack","Generate Parens + Daily Temps","Binary Search + Search 2D","Koko Bananas + Rotated Array","Review — pattern drill","Reverse List + Merge Lists","List Cycle + Reorder","Invert Tree + Max Depth","Same Tree + Subtree","Level Order + Validate BST","Kth Smallest + LCA","Review — trees & lists","Islands + Clone Graph","Pacific Atlantic + Course Sched","Climbing Stairs + House Robber","Coin Change + LIS","Unique Paths + Decode Ways","Mock interview","Pattern cheat sheet","Catch-up hardest","Final mock interview"],
+};
+
+// ===== STATE =====
+let state = {
+  data: {},
+  day: getDayNum(),
+  tab: "log",
+  openBlock: null,
+  toast: null,
+  syncResult: null,
+  syncing: false,
+};
+
+function getDayNum() {
+  const diff = Math.floor((new Date() - START) / 86400000);
+  return Math.max(1, Math.min(DAYS, diff + 1));
+}
+
+function fmtDate(n) {
+  const d = new Date(START);
+  d.setDate(d.getDate() + n - 1);
+  return d.toLocaleDateString("en-US", { weekday:"short", month:"short", day:"numeric" });
+}
+
+function dayDate(n) {
+  const d = new Date(START);
+  d.setDate(d.getDate() + n - 1);
+  return d;
+}
+
+function isGym(n) { const dow = dayDate(n).getDay(); return (dow===1||dow===4) && dow!==0 && dow!==6; }
+function isSat(n) { return dayDate(n).getDay() === 6; }
+function isSun(n) { return dayDate(n).getDay() === 0; }
+
+function load() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) state.data = JSON.parse(raw);
+  } catch(e) {}
+}
+
+function save() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state.data)); } catch(e) {}
+}
+
+function getF(dayN, blockId, key) {
+  return (state.data[`${dayN}_${blockId}`] || {})[key] || "";
+}
+
+function setF(dayN, blockId, key, val) {
+  const k = `${dayN}_${blockId}`;
+  if (!state.data[k]) state.data[k] = {};
+  state.data[k][key] = val;
+  save();
+}
+
+function hasData(dayN, blockId) {
+  const d = state.data[`${dayN}_${blockId}`];
+  return d && Object.values(d).some(v => v && v.trim());
+}
+
+function completionPct(dayN) {
+  let f=0,t=0;
+  for (const b of BLOCKS) {
+    for (const field of b.fields) { t++; if (getF(dayN,b.id,field.key)) f++; }
+  }
+  return t ? Math.round(f/t*100) : 0;
+}
+
+function buildLog() {
+  const d = state.day;
+  let log = `Day ${d}/30 (${fmtDate(d)}) — Progress Log\n\n`;
+  log += `PLANNED:\n`;
+  log += `  Japanese: ${PLANS.japanese[d-1]}\n`;
+  log += `  Guitar: ${PLANS.guitar[d-1]}\n`;
+  log += `  LeetCode: ${PLANS.leetcode[d-1]}\n\n`;
+  log += `ACTUAL:\n`;
+  for (const b of BLOCKS) {
+    const bd = state.data[`${d}_${b.id}`];
+    if (!bd || !Object.values(bd).some(v=>v?.trim())) continue;
+    log += `\n${b.emoji} ${b.label}:\n`;
+    for (const f of b.fields) {
+      if (bd[f.key]?.trim()) log += `  ${f.label}: ${bd[f.key]}\n`;
+    }
+  }
+  log += `\nPlease review my progress vs the plan and adjust my remaining schedule. If I fell behind, redistribute across upcoming days. Update my Google Calendar events for the remaining days.`;
+  return log;
+}
+
+function showToast(msg) {
+  state.toast = msg;
+  render();
+  setTimeout(() => { state.toast = null; render(); }, 2500);
+}
+
+// ===== SYNC =====
+async function syncCalendar() {
+  state.syncing = true;
+  state.syncResult = null;
+  render();
+  try {
+    const log = buildLog();
+    const resp = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 1000,
+        messages: [{
+          role: "user",
+          content: `You are Andrew's schedule assistant. Here is his daily log:\n\n${log}\n\nBased on this, search his Google Calendar for upcoming events with emoji markers (🇯🇵, 🎸, 💻, 📚) in the next 3 days and update their descriptions to reflect adjusted targets. Be concise.`
+        }],
+        mcp_servers: [{
+          type: "url",
+          url: "https://calendarmcp.googleapis.com/mcp/v1",
+          name: "google-calendar"
+        }]
+      })
+    });
+    const result = await resp.json();
+    const texts = (result.content || []).filter(c=>c.type==="text").map(c=>c.text).join("\n");
+    state.syncResult = texts || "Sync attempted — check your calendar.";
+    showToast("Synced!");
+  } catch(err) {
+    state.syncResult = "Sync failed: " + err.message;
+    showToast("Sync failed");
+  }
+  state.syncing = false;
+  render();
+}
+
+async function copyLog() {
+  try {
+    await navigator.clipboard.writeText(buildLog());
+    showToast("Copied!");
+  } catch { showToast("Copy failed"); }
+}
+
+// ===== RENDER =====
+function h(tag, attrs, ...children) {
+  const el = document.createElement(tag);
+  if (attrs) {
+    for (const [k, v] of Object.entries(attrs)) {
+      if (k === "style" && typeof v === "object") {
+        Object.assign(el.style, v);
+      } else if (k.startsWith("on")) {
+        el.addEventListener(k.slice(2).toLowerCase(), v);
+      } else if (k === "class") {
+        el.className = v;
+      } else if (k === "html") {
+        el.innerHTML = v;
+      } else {
+        el.setAttribute(k, v);
+      }
+    }
+  }
+  for (const c of children) {
+    if (typeof c === "string") el.appendChild(document.createTextNode(c));
+    else if (c) el.appendChild(c);
+  }
+  return el;
+}
+
+function renderHeader() {
+  const day = state.day;
+  const sat = isSat(day), sun = isSun(day), gym = isGym(day);
+  let sub = fmtDate(day);
+  if (sat) sub += " — 🐟 Poke Saturday";
+  else if (sun) sub += " — 🐟 Poke Sunday";
+  if (gym) sub += " — 🏋️ Gym Day";
+
+  return h("div", {class:"header"},
+    h("div", {class:"header-row"},
+      h("div", {class:"logo", html:"30-DAY <span>PLAN</span>"}),
+      h("div", {class:"day-pill"}, `DAY ${day}`)
+    ),
+    h("div", {class:"subline"}, sub)
+  );
+}
+
+function renderNav() {
+  const nav = h("div", {class:"nav"});
+  for (const [key, label] of [["log","Log"],["plan","Plan"],["cal","Calendar"],["sync","Sync"]]) {
+    const btn = h("button", {
+      class: state.tab === key ? "active" : "",
+      onClick: () => { state.tab = key; if (key==="log") {} render(); }
+    }, label);
+    nav.appendChild(btn);
+  }
+  return nav;
+}
+
+function renderPlan() {
+  const d = state.day;
+  const card = h("div", {class:"card"});
+  card.appendChild(h("div", {class:"card-label"}, "Today's Targets"));
+  card.appendChild(h("div", {class:"plan-row", html:`<span class="emoji">🇯🇵</span> ${esc(PLANS.japanese[d-1])}`}));
+  card.appendChild(h("div", {class:"plan-row", html:`<span class="emoji">🎸</span> ${esc(PLANS.guitar[d-1])}`}));
+  card.appendChild(h("div", {class:"plan-row", html:`<span class="emoji">💻</span> ${esc(PLANS.leetcode[d-1])}`}));
+  if (isSat(d)) card.appendChild(h("div", {class:"plan-note"}, "🐟 Poke 9:30a–8:30p — compressed schedule today"));
+  if (isSun(d)) card.appendChild(h("div", {class:"plan-note"}, "🐟 Poke 9:30a–3:30p — blocks resume after shift"));
+  if (isGym(d)) card.appendChild(h("div", {class:"plan-row", html:`<span class="emoji">🏋️</span> Gym before work`}));
+  return card;
+}
+
+function esc(s) { const d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
+
+function renderBlocks() {
+  const frag = document.createDocumentFragment();
+  const d = state.day;
+
+  for (const b of BLOCKS) {
+    if (b.id === "gym" && !isGym(d)) continue;
+    const open = state.openBlock === b.id;
+    const has = hasData(d, b.id);
+
+    const block = h("div", {class:"block", style:{borderLeftColor: b.color}});
+    const head = h("button", {class:"block-head", onClick: () => {
+      state.openBlock = open ? null : b.id;
+      render();
+    }},
+      h("span", null, `${b.emoji} ${b.label}`),
+      h("span", {class: `block-status ${has?"done":"empty"}`}, `${has?"✓ logged":"tap to log"} ${open?"▲":"▼"}`)
+    );
+    block.appendChild(head);
+
+    if (open) {
+      const body = h("div", {class:"block-body"});
+      for (const f of b.fields) {
+        const field = h("div", {class:"field"});
+        field.appendChild(h("div", {class:"field-label"}, f.label));
+        const ta = h("textarea", {
+          rows: f.rows || 1,
+          placeholder: f.ph || "",
+        });
+        ta.value = getF(d, b.id, f.key);
+        ta.addEventListener("input", (e) => setF(d, b.id, f.key, e.target.value));
+        field.appendChild(ta);
+        body.appendChild(field);
+      }
+      block.appendChild(body);
+    }
+    frag.appendChild(block);
+  }
+
+  // Day nav
+  const nav = h("div", {class:"day-nav"});
+  nav.appendChild(h("button", {onClick:()=>{state.day=Math.max(1,state.day-1);render();}}, `← Day ${Math.max(1,state.day-1)}`));
+  nav.appendChild(h("button", {class:"today-btn", onClick:()=>{state.day=getDayNum();render();}}, "Today"));
+  nav.appendChild(h("button", {onClick:()=>{state.day=Math.min(DAYS,state.day+1);render();}}, `Day ${Math.min(DAYS,state.day+1)} →`));
+  frag.appendChild(nav);
+
+  return frag;
+}
+
+function renderCalendar() {
+  const frag = document.createDocumentFragment();
+
+  const hdr = h("div", {class:"cal-header"});
+  for (const d of ["S","M","T","W","T","F","S"]) hdr.appendChild(h("span", null, d));
+  frag.appendChild(hdr);
+
+  const grid = h("div", {class:"cal-grid"});
+
+  // Spacers for first day
+  const firstDow = dayDate(1).getDay();
+  for (let i = 0; i < firstDow; i++) grid.appendChild(h("div", {class:"cal-spacer"}));
+
+  for (let i = 1; i <= DAYS; i++) {
+    const pct = completionPct(i);
+    const cur = i === getDayNum();
+    const classes = ["cal-cell"];
+    if (cur) classes.push("current");
+    if (pct > 0) classes.push("has-data");
+
+    const cell = h("button", {
+      class: classes.join(" "),
+      style: pct > 0 ? {background:`rgba(74,222,128,${pct/300})`} : {},
+      onClick: () => { state.day = i; state.tab = "log"; render(); }
+    },
+      h("div", {class:"num"}, String(i)),
+      pct > 0 ? h("div", {class:"pct"}, `${pct}%`) : null
+    );
+    grid.appendChild(cell);
+  }
+  frag.appendChild(grid);
+  return frag;
+}
+
+function renderSync() {
+  const card = h("div", {class:"card"});
+  card.appendChild(h("div", {class:"card-label"}, "Sync to Calendar"));
+  card.appendChild(h("p", {class:"sync-desc"}, `Sends your Day ${state.day} log through Claude → Google Calendar MCP. Your upcoming events get updated with adjusted targets automatically.`));
+
+  const syncBtn = h("button", {
+    class:"sync-btn",
+    onClick: syncCalendar,
+    disabled: state.syncing ? "disabled" : undefined
+  }, state.syncing ? "⏳ Syncing..." : "⚡ Auto-Sync to Google Calendar");
+  card.appendChild(syncBtn);
+
+  card.appendChild(h("div", {class:"divider"}));
+
+  card.appendChild(h("p", {class:"sync-desc"}, "Or copy your log and paste it into a Claude chat for detailed rescheduling:"));
+  card.appendChild(h("button", {class:"copy-btn", onClick: copyLog}, "📋 Copy Log to Clipboard"));
+
+  if (state.syncResult) {
+    const box = h("div", {class:"result-box"});
+    box.appendChild(h("div", {class:"result-label"}, "Sync Result"));
+    box.appendChild(h("div", {class:"result-text"}, state.syncResult));
+    card.appendChild(box);
+  }
+
+  const pre = h("pre", {class:"log-preview"}, buildLog());
+  card.appendChild(pre);
+
+  return card;
+}
+
+function render() {
+  const app = document.getElementById("app");
+  app.innerHTML = "";
+
+  // Toast
+  if (state.toast) {
+    app.appendChild(h("div", {class:"toast"}, state.toast));
+  }
+
+  app.appendChild(renderHeader());
+  app.appendChild(renderNav());
+
+  if (state.tab === "plan") app.appendChild(renderPlan());
+  else if (state.tab === "log") app.appendChild(renderBlocks());
+  else if (state.tab === "cal") app.appendChild(renderCalendar());
+  else if (state.tab === "sync") app.appendChild(renderSync());
+
+  app.appendChild(h("div", {class:"footer"}, "Data stored in your browser. Add to home screen for app-like access."));
+}
+
+// ===== INIT =====
+load();
+render();
+</script>
+</body>
+</html>
