@@ -401,7 +401,7 @@ const PLANS = {
 let state = {
   data: {},
   day: getDayNum(),
-  tab: "log",
+  tab: "plan",
   openBlock: null,
   toast: null,
   syncResult: null,
@@ -490,42 +490,6 @@ function showToast(msg) {
   setTimeout(() => { state.toast = null; render(); }, 2500);
 }
 
-// ===== SYNC =====
-async function syncCalendar() {
-  state.syncing = true;
-  state.syncResult = null;
-  render();
-  try {
-    const log = buildLog();
-    const resp = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: "claude-sonnet-4-20250514",
-        max_tokens: 1000,
-        messages: [{
-          role: "user",
-          content: `You are Andrew's schedule assistant. Here is his daily log:\n\n${log}\n\nBased on this, search his Google Calendar for upcoming events with emoji markers (🇯🇵, 🎸, 💻, 📚) in the next 3 days and update their descriptions to reflect adjusted targets. Be concise.`
-        }],
-        mcp_servers: [{
-          type: "url",
-          url: "https://calendarmcp.googleapis.com/mcp/v1",
-          name: "google-calendar"
-        }]
-      })
-    });
-    const result = await resp.json();
-    const texts = (result.content || []).filter(c=>c.type==="text").map(c=>c.text).join("\n");
-    state.syncResult = texts || "Sync attempted — check your calendar.";
-    showToast("Synced!");
-  } catch(err) {
-    state.syncResult = "Sync failed: " + err.message;
-    showToast("Sync failed");
-  }
-  state.syncing = false;
-  render();
-}
-
 async function copyLog() {
   try {
     await navigator.clipboard.writeText(buildLog());
@@ -577,7 +541,7 @@ function renderHeader() {
 
 function renderNav() {
   const nav = h("div", {class:"nav"});
-  for (const [key, label] of [["log","Log"],["plan","Plan"],["cal","Calendar"],["sync","Sync"]]) {
+  for (const [key, label] of [["plan","Plan"],["log","Log"],["cal","Calendar"],["sync","Send"]]) {
     const btn = h("button", {
       class: state.tab === key ? "active" : "",
       onClick: () => { state.tab = key; if (key==="log") {} render(); }
@@ -686,27 +650,17 @@ function renderCalendar() {
 
 function renderSync() {
   const card = h("div", {class:"card"});
-  card.appendChild(h("div", {class:"card-label"}, "Sync to Calendar"));
-  card.appendChild(h("p", {class:"sync-desc"}, `Sends your Day ${state.day} log through Claude → Google Calendar MCP. Your upcoming events get updated with adjusted targets automatically.`));
+  card.appendChild(h("div", {class:"card-label"}, "Send to Claude"));
 
-  const syncBtn = h("button", {
-    class:"sync-btn",
-    onClick: syncCalendar,
-    disabled: state.syncing ? "disabled" : undefined
-  }, state.syncing ? "⏳ Syncing..." : "⚡ Auto-Sync to Google Calendar");
-  card.appendChild(syncBtn);
+  card.appendChild(h("p", {class:"sync-desc"}, `Copy your Day ${state.day} log and paste it into Claude. Claude will read your progress, adjust your remaining schedule, and update your Google Calendar events directly.`));
+
+  card.appendChild(h("button", {class:"sync-btn", onClick: copyLog}, "📋 Copy Day " + state.day + " Log to Clipboard"));
 
   card.appendChild(h("div", {class:"divider"}));
 
-  card.appendChild(h("p", {class:"sync-desc"}, "Or copy your log and paste it into a Claude chat for detailed rescheduling:"));
-  card.appendChild(h("button", {class:"copy-btn", onClick: copyLog}, "📋 Copy Log to Clipboard"));
-
-  if (state.syncResult) {
-    const box = h("div", {class:"result-box"});
-    box.appendChild(h("div", {class:"result-label"}, "Sync Result"));
-    box.appendChild(h("div", {class:"result-text"}, state.syncResult));
-    card.appendChild(box);
-  }
+  const steps = h("div", {class:"sync-desc"});
+  steps.innerHTML = "<strong style='color:#fff'>Nightly routine:</strong><br>1. Log progress in each block throughout the day<br>2. Tap this button to copy your log<br>3. Open Claude → paste → get adjusted schedule<br><br>Claude will update your Google Calendar automatically.";
+  card.appendChild(steps);
 
   const pre = h("pre", {class:"log-preview"}, buildLog());
   card.appendChild(pre);
