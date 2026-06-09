@@ -102,58 +102,58 @@ const SK = "growth30_v3";
 const DAYS = 30;
 const START = new Date("2026-06-09T00:00:00");
 
-// ===== SCHEDULE TEMPLATES =====
+// ===== SCHEDULE TEMPLATES (24h time) =====
 const WEEKDAY = [
-  {t:"7:00",e:"7:30",label:"Morning Routine",emoji:"☀️",color:"#7986CB",type:"routine",desc:"Wake up, coffee, stretch"},
-  {t:"7:30",e:"8:00",label:"Guitar Block 1",emoji:"🎸",color:"var(--guitar)",type:"guitar",desc:"_guitar_"},
-  {t:"8:00",e:"10:00",label:"Reddit Work Block 1",emoji:"💼",color:"var(--work)",type:"work",desc:"Deep work: detections, pipelines, PRs"},
+  {t:"07:00",e:"07:30",label:"Morning Routine",emoji:"☀️",color:"#7986CB",type:"routine",desc:"Wake up, coffee, stretch"},
+  {t:"07:30",e:"08:00",label:"Guitar Block 1",emoji:"🎸",color:"var(--guitar)",type:"guitar",desc:"_guitar_"},
+  {t:"08:00",e:"10:00",label:"Reddit Work Block 1",emoji:"💼",color:"var(--work)",type:"work",desc:"Deep work: detections, pipelines, PRs"},
   {t:"10:00",e:"11:00",label:"Japanese",emoji:"🇯🇵",color:"var(--jp)",type:"japanese",desc:"_japanese_"},
   {t:"11:00",e:"11:05",label:"Transition",emoji:"⏸️",color:"var(--text3)",type:"break",desc:"Stand up, hydrate"},
   {t:"11:05",e:"12:00",label:"Reddit Work Block 2",emoji:"💼",color:"var(--work)",type:"work",desc:"Meetings, code reviews, Slack"},
   {t:"12:00",e:"12:45",label:"Lunch",emoji:"🍱",color:"var(--text3)",type:"break",desc:"Eat away from desk"},
-  {t:"12:45",e:"1:00",label:"Downtime",emoji:"⏸️",color:"var(--text3)",type:"break",desc:"Decompress"},
-  {t:"1:00",e:"2:30",label:"Reddit Work Block 3",emoji:"💼",color:"var(--work)",type:"work",desc:"Pipeline maintenance, detection tuning"},
-  {t:"2:30",e:"2:45",label:"Downtime",emoji:"⏸️",color:"var(--text3)",type:"break",desc:"Stretch, water"},
-  {t:"2:45",e:"4:00",label:"Reddit Work Block 4",emoji:"💼",color:"var(--work)",type:"work",desc:"Lighter: docs, Slack, planning"},
-  {t:"4:00",e:"4:15",label:"Work done! Break",emoji:"⏸️",color:"var(--text3)",type:"break",desc:"Stretch, snack, reset"},
-  {t:"4:15",e:"5:15",label:"Guitar Block 2",emoji:"🎸",color:"var(--guitar)",type:"guitar",desc:"_guitar_ (main session)"},
-  {t:"5:15",e:"5:30",label:"Break",emoji:"⏸️",color:"var(--text3)",type:"break",desc:"Rest your fingers"},
-  {t:"5:30",e:"6:30",label:"LeetCode",emoji:"💻",color:"var(--leet)",type:"leetcode",desc:"_leetcode_"},
-  {t:"6:30",e:"6:45",label:"LeetCode done!",emoji:"⏸️",color:"var(--text3)",type:"break",desc:"Dinner time"},
-  {t:"6:45",e:"7:30",label:"Dinner",emoji:"🍽️",color:"var(--text3)",type:"break",desc:"Eat. Relax. Be present."},
-  {t:"7:30",e:"8:00",label:"Guitar Block 3",emoji:"🎸",color:"var(--guitar)",type:"guitar",desc:"Free jam — keep it fun"},
-  {t:"8:00",e:"9:00",label:"_evening_",emoji:"_eveemoji_",color:"_evecolor_",type:"_evetype_",desc:"_evedesc_"},
-  {t:"9:00",e:"9:15",label:"Daily Log",emoji:"📋",color:"#795548",type:"routine",desc:"Log progress, copy to Claude"},
-  {t:"9:15",e:"10:30",label:"Free Time",emoji:"🎮",color:"#795548",type:"routine",desc:"WoW, TFT, anime, Tomie time"},
-  {t:"10:30",e:"11:00",label:"Wind Down",emoji:"🌙",color:"#795548",type:"routine",desc:"Screens off by 11"},
+  {t:"12:45",e:"13:00",label:"Downtime",emoji:"⏸️",color:"var(--text3)",type:"break",desc:"Decompress"},
+  {t:"13:00",e:"14:30",label:"Reddit Work Block 3",emoji:"💼",color:"var(--work)",type:"work",desc:"Pipeline maintenance, detection tuning"},
+  {t:"14:30",e:"14:45",label:"Downtime",emoji:"⏸️",color:"var(--text3)",type:"break",desc:"Stretch, water"},
+  {t:"14:45",e:"16:00",label:"Reddit Work Block 4",emoji:"💼",color:"var(--work)",type:"work",desc:"Lighter: docs, Slack, planning"},
+  {t:"16:00",e:"16:15",label:"Work done! Break",emoji:"⏸️",color:"var(--text3)",type:"break",desc:"Stretch, snack, reset"},
+  {t:"16:15",e:"17:15",label:"Guitar Block 2",emoji:"🎸",color:"var(--guitar)",type:"guitar",desc:"_guitar_ (main session)"},
+  {t:"17:15",e:"17:30",label:"Break",emoji:"⏸️",color:"var(--text3)",type:"break",desc:"Rest your fingers"},
+  {t:"17:30",e:"18:30",label:"LeetCode",emoji:"💻",color:"var(--leet)",type:"leetcode",desc:"_leetcode_"},
+  {t:"18:30",e:"18:45",label:"LeetCode done!",emoji:"⏸️",color:"var(--text3)",type:"break",desc:"Dinner time"},
+  {t:"18:45",e:"19:30",label:"Dinner",emoji:"🍽️",color:"var(--text3)",type:"break",desc:"Eat. Relax. Be present."},
+  {t:"19:30",e:"20:00",label:"Guitar Block 3",emoji:"🎸",color:"var(--guitar)",type:"guitar",desc:"Free jam — keep it fun"},
+  {t:"20:00",e:"21:00",label:"_evening_",emoji:"_eveemoji_",color:"_evecolor_",type:"_evetype_",desc:"_evedesc_"},
+  {t:"21:00",e:"21:15",label:"Daily Log",emoji:"📋",color:"#795548",type:"routine",desc:"Log progress, copy to Claude"},
+  {t:"21:15",e:"22:30",label:"Free Time",emoji:"🎮",color:"#795548",type:"routine",desc:"WoW, TFT, anime, Tomie time"},
+  {t:"22:30",e:"23:00",label:"Wind Down",emoji:"🌙",color:"#795548",type:"routine",desc:"Screens off by 11"},
 ];
 
 const SATURDAY = [
-  {t:"7:00",e:"7:30",label:"Morning Routine",emoji:"☀️",color:"#7986CB",type:"routine",desc:"Wake up, coffee, stretch"},
-  {t:"7:30",e:"8:30",label:"Japanese",emoji:"🇯🇵",color:"var(--jp)",type:"japanese",desc:"_japanese_"},
-  {t:"8:30",e:"9:15",label:"Guitar (compressed)",emoji:"🎸",color:"var(--guitar)",type:"guitar",desc:"_guitar_"},
-  {t:"9:30",e:"8:30p",label:"Poke Shop Shift",emoji:"🐟",color:"var(--poke)",type:"work",desc:"Full shift including commute"},
-  {t:"8:30p",e:"8:45",label:"Decompress",emoji:"⏸️",color:"var(--text3)",type:"break",desc:"Long shift done. No pressure tonight."},
-  {t:"8:45",e:"9:15",label:"LeetCode (optional)",emoji:"💻",color:"var(--leet)",type:"leetcode",desc:"_leetcode_ — only if you have energy"},
-  {t:"9:15",e:"9:30",label:"Daily Log",emoji:"📋",color:"#795548",type:"routine",desc:"Quick notes — don't stress"},
-  {t:"9:30",e:"11:00",label:"Free Time",emoji:"🎮",color:"#795548",type:"routine",desc:"You earned this"},
+  {t:"07:00",e:"07:30",label:"Morning Routine",emoji:"☀️",color:"#7986CB",type:"routine",desc:"Wake up, coffee, stretch"},
+  {t:"07:30",e:"08:30",label:"Japanese",emoji:"🇯🇵",color:"var(--jp)",type:"japanese",desc:"_japanese_"},
+  {t:"08:30",e:"09:15",label:"Guitar (compressed)",emoji:"🎸",color:"var(--guitar)",type:"guitar",desc:"_guitar_"},
+  {t:"09:30",e:"20:30",label:"Poke Shop Shift",emoji:"🐟",color:"var(--poke)",type:"work",desc:"Full shift including commute"},
+  {t:"20:30",e:"20:45",label:"Decompress",emoji:"⏸️",color:"var(--text3)",type:"break",desc:"Long shift done. No pressure tonight."},
+  {t:"20:45",e:"21:15",label:"LeetCode (optional)",emoji:"💻",color:"var(--leet)",type:"leetcode",desc:"_leetcode_ — only if you have energy"},
+  {t:"21:15",e:"21:30",label:"Daily Log",emoji:"📋",color:"#795548",type:"routine",desc:"Quick notes — don't stress"},
+  {t:"21:30",e:"23:00",label:"Free Time",emoji:"🎮",color:"#795548",type:"routine",desc:"You earned this"},
 ];
 
 const SUNDAY = [
-  {t:"7:00",e:"7:30",label:"Morning Routine",emoji:"☀️",color:"#7986CB",type:"routine",desc:"Wake up, coffee, stretch"},
-  {t:"7:30",e:"8:30",label:"Japanese",emoji:"🇯🇵",color:"var(--jp)",type:"japanese",desc:"_japanese_"},
-  {t:"8:30",e:"9:15",label:"Guitar Block 1",emoji:"🎸",color:"var(--guitar)",type:"guitar",desc:"_guitar_"},
-  {t:"9:30",e:"3:30",label:"Poke Shop Shift",emoji:"🐟",color:"var(--poke)",type:"work",desc:"Shift including commute"},
-  {t:"3:30",e:"4:00",label:"Decompress",emoji:"⏸️",color:"var(--text3)",type:"break",desc:"Snack, stretch"},
-  {t:"4:00",e:"5:00",label:"Guitar Block 2",emoji:"🎸",color:"var(--guitar)",type:"guitar",desc:"_guitar_ (main session)"},
-  {t:"5:00",e:"5:15",label:"Break",emoji:"⏸️",color:"var(--text3)",type:"break",desc:"Water, stretch"},
-  {t:"5:15",e:"6:15",label:"LeetCode",emoji:"💻",color:"var(--leet)",type:"leetcode",desc:"_leetcode_"},
-  {t:"6:15",e:"7:00",label:"Dinner",emoji:"🍽️",color:"var(--text3)",type:"break",desc:"Dinner with Tomie"},
-  {t:"7:00",e:"7:30",label:"Guitar Block 3",emoji:"🎸",color:"var(--guitar)",type:"guitar",desc:"Free jam"},
-  {t:"7:30",e:"8:30",label:"_evening_",emoji:"_eveemoji_",color:"_evecolor_",type:"_evetype_",desc:"_evedesc_"},
-  {t:"8:30",e:"8:45",label:"Daily Log",emoji:"📋",color:"#795548",type:"routine",desc:"Log progress"},
-  {t:"8:45",e:"10:30",label:"Free Time",emoji:"🎮",color:"#795548",type:"routine",desc:"Relax, you're done"},
-  {t:"10:30",e:"11:00",label:"Wind Down",emoji:"🌙",color:"#795548",type:"routine",desc:"Prep for Monday"},
+  {t:"07:00",e:"07:30",label:"Morning Routine",emoji:"☀️",color:"#7986CB",type:"routine",desc:"Wake up, coffee, stretch"},
+  {t:"07:30",e:"08:30",label:"Japanese",emoji:"🇯🇵",color:"var(--jp)",type:"japanese",desc:"_japanese_"},
+  {t:"08:30",e:"09:15",label:"Guitar Block 1",emoji:"🎸",color:"var(--guitar)",type:"guitar",desc:"_guitar_"},
+  {t:"09:30",e:"15:30",label:"Poke Shop Shift",emoji:"🐟",color:"var(--poke)",type:"work",desc:"Shift including commute"},
+  {t:"15:30",e:"16:00",label:"Decompress",emoji:"⏸️",color:"var(--text3)",type:"break",desc:"Snack, stretch"},
+  {t:"16:00",e:"17:00",label:"Guitar Block 2",emoji:"🎸",color:"var(--guitar)",type:"guitar",desc:"_guitar_ (main session)"},
+  {t:"17:00",e:"17:15",label:"Break",emoji:"⏸️",color:"var(--text3)",type:"break",desc:"Water, stretch"},
+  {t:"17:15",e:"18:15",label:"LeetCode",emoji:"💻",color:"var(--leet)",type:"leetcode",desc:"_leetcode_"},
+  {t:"18:15",e:"19:00",label:"Dinner",emoji:"🍽️",color:"var(--text3)",type:"break",desc:"Dinner with Tomie"},
+  {t:"19:00",e:"19:30",label:"Guitar Block 3",emoji:"🎸",color:"var(--guitar)",type:"guitar",desc:"Free jam"},
+  {t:"19:30",e:"20:30",label:"_evening_",emoji:"_eveemoji_",color:"_evecolor_",type:"_evetype_",desc:"_evedesc_"},
+  {t:"20:30",e:"20:45",label:"Daily Log",emoji:"📋",color:"#795548",type:"routine",desc:"Log progress"},
+  {t:"20:45",e:"22:30",label:"Free Time",emoji:"🎮",color:"#795548",type:"routine",desc:"Relax, you're done"},
+  {t:"22:30",e:"23:00",label:"Wind Down",emoji:"🌙",color:"#795548",type:"routine",desc:"Prep for Monday"},
 ];
 
 // ===== CURRICULUM =====
@@ -258,12 +258,7 @@ function getSchedule(dayNum) {
 }
 
 function parseTime(str) {
-  // Handle "8:30p" style
-  let pm = str.includes("p");
-  let s = str.replace("p","");
-  let [h,m] = s.split(":").map(Number);
-  if(pm && h < 12) h += 12;
-  if(!pm && h < 7) h += 12; // Assume PM for times like 1:00, 2:30 etc
+  const [h,m] = str.split(":").map(Number);
   return h * 60 + (m||0);
 }
 
